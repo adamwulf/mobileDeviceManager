@@ -5,7 +5,9 @@ build/*
 *.pbxuser
 *.perspective
 *.perspectivev3
-
+mobileDeviceManager.xcodeproj/project.xcworkspace/xcshareddata/
+mobileDeviceManager.xcodeproj/project.xcworkspace/xcuserdata/
+mobileDeviceManager.xcodeproj/xcuserdata/adam.xcuserdatad/
 *.swp
 *~.nib
 

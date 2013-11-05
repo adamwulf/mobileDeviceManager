@@ -47,7 +47,33 @@ Show device info:\n\
     AMDevice *device = adapter.iosDevice;
     
     
-    if ([option isEqualToString:@"copy"]) {
+    if ([option isEqualToString:@"get"]) {
+        NSLog(@"Will copy from Device: %@", device);
+        
+        NSString *fromFile = [arguments stringForKey:@"from"];
+        NSString *toFile = [arguments stringForKey:@"to"];
+        NSString *appId = [arguments stringForKey:@"app"];
+        
+        if (!fromFile || !appId) {
+            NSLog(@"no fromFile | no appId");
+            return 1001;
+        }
+        
+        AFCApplicationDirectory *appDir = [device newAFCApplicationDirectory:appId];
+        
+        NSArray *files = [appDir directoryContents:@"/Documents"];
+        NSLog(@"app Documents files: %@", files);
+        
+        if (!toFile) {
+            [appDir copyRemoteFile:fromFile toLocalFile:@"/Users/adam/Desktop/"];
+        } else {
+            [appDir copyRemoteFile:fromFile toLocalFile:toFile];
+        }
+        
+        files = [appDir directoryContents:@"/Documents"];
+        NSLog(@"app Documents files: %@", files);
+        
+    }else if ([option isEqualToString:@"copy"]) {
         NSLog(@"Will copy to Device: %@", device);
         
         NSString *fromFile = [arguments stringForKey:@"from"];
